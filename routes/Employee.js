@@ -2,12 +2,26 @@ const express = require('express');
 const mysql = require('mysql2')
 const empApp = express.Router();
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'manager',
+//     database: 'employeedb'
+// });
+
+const connection = mysql.createPool({
+    host: "localhost",
+    user: "root",
     password: 'manager',
-    database: 'employeedb'
-});
+    database: 'employeedb',
+    waitForConnections: true,
+    connectionLimit: 10,
+    maxIdle: 10,
+    idleTimeout: 60000,
+    queueLimit: 0,
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 0,
+  })
 
 
 
